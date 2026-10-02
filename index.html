@@ -75,7 +75,7 @@ const stop = (t, m) => [t, m];
 const sat = ["Rất không hài lòng","Rất hài lòng"];
 const Q = [
 {id:"Q0",s:0,k:"s",t:"Bạn đồng ý tham gia và cho phép nhóm sử dụng câu trả lời ẩn danh?",d:"Khảo sát tìm hiểu cách các bạn trẻ chuẩn bị nghi lễ, phong tục gia đình (giỗ, Tết, Rằm/mùng Một, ông Công ông Táo, nhập trạch, cưới hỏi, đi lễ chùa) và mức độ quan tâm của bạn tới một nền tảng hỗ trợ việc này. Dành cho người từ 18 đến 35 tuổi, khoảng 10 phút. Câu trả lời ẩn danh, chỉ dùng cho báo cáo học tập của nhóm. Bạn có thể bỏ qua các câu không bắt buộc và dừng bất cứ lúc nào. Nếu để lại email ở cuối khảo sát, email được lưu riêng, không gắn với câu trả lời của bạn.",o:["Có","Không"],x:v=>v=="Không"&&stop("Cảm ơn bạn","Mình cần sự đồng ý của bạn để tiếp tục. Cảm ơn bạn đã ghé qua.")},
-{id:"S1",s:1,k:"s",t:"Độ tuổi của bạn?",o:["Dưới 18","18–24","25–30","31–35","Trên 35"],x:v=>(v=="Dưới 18"||v=="Trên 35")&&stop("Cảm ơn bạn","Khảo sát này dành cho người từ 18 đến 35 tuổi.")},
+{id:"S1",s:1,k:"s",t:"Độ tuổi của bạn?",o:["Dưới 18","18–24","25–30","31–35","Trên 35"],
 {id:"S2",s:1,k:"s",t:"Công việc của bạn có liên quan trực tiếp đến lĩnh vực nào sau đây không?",o:["Nghiên cứu/giảng dạy văn hóa","Hoạt động tôn giáo hoặc tín ngưỡng","Cung cấp sản phẩm/dịch vụ cho các dịp văn hóa, nghi lễ","Phát triển nội dung hoặc ứng dụng liên quan","Không"],x:v=>v!="Không"&&stop("Cảm ơn bạn","Lần này nhóm đang tìm người không làm việc trực tiếp trong các lĩnh vực đó. Cảm ơn bạn đã quan tâm.")},
 {id:"S3",s:1,k:"s",t:"Trong 12 tháng qua, vai trò của bạn với các nghi lễ gia đình là gì? (chọn mức cao nhất)",o:S3},
 {id:"Q1",s:2,k:"m",t:"Bạn đã tự chuẩn bị/điều phối những nghi lễ nào trong 12 tháng qua?",o:[...A,"Chưa từng"]},
