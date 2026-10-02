@@ -8,9 +8,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600&family=Lora:wght@500;600&display=swap" rel="stylesheet">
 <style>
-:root{--bg:#E8EEE7;--card:#F6F9F4;--ink:#1D2A24;--mut:#5B6B62;--jade:#2E5E4E;--on:#fff;--gold:#C99A2E;--red:#A32A2A;--line:#C5D1C7;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
-@media(prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#141C18;--card:#1D2822;--ink:#E6EEE8;--mut:#95A69B;--jade:#6FB39A;--on:#0F1A15;--line:#34453B;--red:#E58A8A}}
-:root[data-theme="dark"]{--bg:#141C18;--card:#1D2822;--ink:#E6EEE8;--mut:#95A69B;--jade:#6FB39A;--on:#0F1A15;--line:#34453B;--red:#E58A8A}
+:root{--bg:#19191B;--card:#242427;--ink:#F3EBDA;--mut:#A99F8A;--jade:#C99A2E;--on:#1A1A1C;--gold:#D9B45A;--red:#E58A8A;--line:#3D3626;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
 html{scroll-padding-top:env(safe-area-inset-top,0px)}
 *,*::before,*::after{box-sizing:inherit}
 body{margin:0;background:var(--bg);color:var(--ink);font:400 16px/1.55 'Be Vietnam Pro',system-ui,sans-serif}
@@ -74,7 +72,7 @@ const pay = a => (a.Q21 || "").startsWith("Mua");
 const stop = (t, m) => [t, m];
 const sat = ["Rất không hài lòng","Rất hài lòng"];
 const Q = [
-{id:"Q0",s:0,k:"s",t:"Bạn đồng ý tham gia và cho phép nhóm sử dụng câu trả lời ẩn danh?",d:"Khảo sát tìm hiểu cách các bạn trẻ chuẩn bị nghi lễ, phong tục gia đình (giỗ, Tết, Rằm/mùng Một, ông Công ông Táo, nhập trạch, cưới hỏi, đi lễ chùa) và mức độ quan tâm của bạn tới một nền tảng hỗ trợ việc này. Dành cho người từ 18 đến 35 tuổi, khoảng 10 phút. Câu trả lời ẩn danh, chỉ dùng cho báo cáo học tập của nhóm. Bạn có thể bỏ qua các câu không bắt buộc và dừng bất cứ lúc nào. Nếu để lại email ở cuối khảo sát, email được lưu riêng, không gắn với câu trả lời của bạn.",o:["Có","Không"],x:v=>v=="Không"&&stop("Cảm ơn bạn","Mình cần sự đồng ý của bạn để tiếp tục. Cảm ơn bạn đã ghé qua.")},
+{id:"Q0",s:0,k:"s",t:"Bạn đồng ý tham gia và cho phép nhóm sử dụng câu trả lời ẩn danh?",d:"Khảo sát tìm hiểu cách các bạn trẻ cần chuẩn bị nghi lễ, phong tục gia đình (giỗ, Tết, Rằm/mùng Một, ông Công ông Táo, nhập trạch, cưới hỏi, đi lễ chùa) và mức độ quan tâm của bạn tới một nền tảng hỗ trợ việc này.\n\Câu trả lời ẩn danh, chỉ dùng cho báo cáo học tập của nhóm. Bạn có thể bỏ qua các câu không bắt buộc và dừng bất cứ lúc nào.\n\nNếu để lại email ở cuối khảo sát, email được lưu riêng, không gắn với câu trả lời của bạn.",o:["Có","Không"],x:v=>v=="Không"&&stop("Cảm ơn bạn","Mình cần sự đồng ý của bạn để tiếp tục. Cảm ơn bạn đã ghé qua.")},
 {id:"S1",s:1,k:"s",t:"Độ tuổi của bạn?",o:["Dưới 18","18–24","25–30","31–35","Trên 35"]},
 {id:"S2",s:1,k:"s",t:"Công việc của bạn có liên quan trực tiếp đến lĩnh vực nào sau đây không?",o:["Nghiên cứu/giảng dạy văn hóa","Hoạt động tôn giáo hoặc tín ngưỡng","Cung cấp sản phẩm/dịch vụ cho các dịp văn hóa, nghi lễ","Phát triển nội dung hoặc ứng dụng liên quan","Không"],x:v=>v!="Không"&&stop("Cảm ơn bạn","Lần này nhóm đang tìm người không làm việc trực tiếp trong các lĩnh vực đó. Cảm ơn bạn đã quan tâm.")},
 {id:"S3",s:1,k:"s",t:"Trong 12 tháng qua, vai trò của bạn với các nghi lễ gia đình là gì? (chọn mức cao nhất)",o:S3},
@@ -136,7 +134,7 @@ const err = m => { const e = $(".err"); if (e) e.textContent = m || ""; };
 
 function start() {
   $("#bar").style.width = "0"; $("#sec").textContent = "";
-  app.innerHTML = `<h1>Chuyện nghi lễ nhà bạn, kể Nếp Việt nghe với 🌾</h1><p class="d">Khảo sát dành cho bạn từ 18 đến 35 tuổi. Khoảng 10 phút, không cần đăng nhập, không hỏi tên thật.</p><div class="nav"><button id="go" style="margin-left:0">${i >= 0 ? "Tiếp tục" : "Bắt đầu"}</button></div><p class="note">Tự động lưu nháp trên máy bạn</p>`;
+  app.innerHTML = `<h1>Từ Nếp nhà, kể chuyện Việt ✨</h1><p class="d">Khảo sát dành cho người trẻ Việt Nam. Khoảng 10 phút, trả lời ẩn danh.</p><div class="nav"><button id="go" style="margin-left:0">${i >= 0 ? "Tiếp tục" : "Bắt đầu"}</button></div><p class="note">Tự động lưu câu trả lời</p>`;
 }
 function render() {
   const q = Q[i], v = a[q.id];
@@ -203,7 +201,7 @@ function finish() {
   if (SUBMIT_URL) {
     const post = b => fetch(SUBMIT_URL, {method: "POST", mode: "no-cors", headers: {"Content-Type": "text/plain"}, body: b}).catch(() => {});
     post(main); if (email) post(JSON.stringify({mail: email}));
-    end("Cảm ơn bạn rất nhiều 🌾", "Câu trả lời của bạn đã được ghi nhận. Nếp Việt sẽ liên hệ qua email nếu bạn đã đăng ký dùng thử sớm.");
+    end("Cảm ơn bạn đã dành thời gian điền khảo sát!", "Câu trả lời của bạn đã được ghi nhận. Nếp Việt✨ sẽ liên hệ qua email nếu bạn đã đăng ký dùng thử sớm.");
   } else {
     end("Cảm ơn bạn rất nhiều 🌾", "Chế độ thử: trang chưa được nối với nơi nhận dữ liệu, nên câu trả lời chưa được gửi đi.");
     app.insertAdjacentHTML("beforeend", '<div class="nav"><button id="dl" style="margin-left:0">Tải bản trả lời (.json)</button></div>');
