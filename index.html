@@ -12,6 +12,7 @@
 html{scroll-padding-top:env(safe-area-inset-top,0px)}
 *,*::before,*::after{box-sizing:inherit}
 body{margin:0;background:var(--bg);color:var(--ink);font:400 16px/1.55 'Be Vietnam Pro',system-ui,sans-serif}
+body::before{content:"";position:fixed;inset:0;z-index:-1;background:url("rong.jpg") center/cover no-repeat;opacity:.4}
 .w{max-width:640px;margin:0 auto;padding:18px 18px 48px}
 .top{display:flex;justify-content:space-between;align-items:baseline;gap:12px;font-size:13px;color:var(--mut)}
 .logo{font:600 20px 'Lora',serif;color:var(--ink)}
