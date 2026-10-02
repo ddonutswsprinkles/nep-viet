@@ -59,7 +59,7 @@ button:focus-visible{outline:3px solid var(--gold);outline-offset:2px}
 </div>
 <script>
 // Điền địa chỉ nhận dữ liệu (ví dụ Google Apps Script Web App). Để trống = chế độ thử, cho tải file trả lời.
-const SUBMIT_URL = "";
+const SUBMIT_URL = "https://script.google.com/macros/s/AKfycbxAArVCgbWOao_vsu_-w6GC4uvo55cK3f9bvk2UKdgXUf4zzQyQhg1PrUJfXIYyIroN/exec";
 const SK = "nepviet-draft-v1";
 const SEC = ["Mở đầu","Sàng lọc","Nhu cầu","Cách tìm hiểu","Khó khăn","Ý tưởng Nếp Việt","Trả phí","Quyền riêng tư","Về bạn"];
 const A = ["Tết","Giỗ","Rằm/mùng Một","Ông Công ông Táo","Nhập trạch","Cưới hỏi","Đi lễ chùa","Khác"];
@@ -183,12 +183,26 @@ async function dl(data) {
   const u = URL.createObjectURL(new Blob([data], {type: "application/json"}));
   const l = document.createElement("a"); l.href = u; l.download = "tra-loi-nep-viet.json"; l.click();
 }
+function flat() {
+  const o = {time: new Date().toISOString().slice(0, 10)}, cols = ["time"];
+  const put = (k, v) => { o[k] = Array.isArray(v) ? v.join("; ") : v; cols.push(k); };
+  Q.forEach(q => {
+    if (q.id == "Q25b") return;
+    const on = !q.sh || q.sh(a), v = on ? a[q.id] : undefined;
+    if (q.k == "g") q.r.forEach((_, r) => put(q.id + "_" + (q.na ? String.fromCharCode(97 + r) : r + 1), v ? v[r] : ""));
+    else if (q.k == "n") ["a","b","c","d"].forEach(k => put(q.id + k, v ? v[k] : ""));
+    else if (q.k == "r") [0,1,2].forEach(n => put(q.id + "abc"[n], v && v[n] ? String.fromCharCode(97 + +v[n]) + ". " + q.r[v[n]] : ""));
+    else put(q.id, v == null ? "" : v);
+    if (q.o && q.o.includes("Khác")) put(q.id + "_khac", on ? (a[q.id + "_o"] || "") : "");
+  });
+  return {...o, cols};
+}
 function finish() {
-  const email = a.Q25b; const ans = {...a}; delete ans.Q25b;
-  const main = JSON.stringify({time: new Date().toISOString(), answers: ans});
+  const email = (a.Q25 == "Có" && a.Q25b || "").trim();
+  const main = JSON.stringify(flat());
   if (SUBMIT_URL) {
     const post = b => fetch(SUBMIT_URL, {method: "POST", mode: "no-cors", headers: {"Content-Type": "text/plain"}, body: b}).catch(() => {});
-    post(main); if (email) post(JSON.stringify({type: "email", email}));
+    post(main); if (email) post(JSON.stringify({mail: email}));
     end("Cảm ơn bạn rất nhiều 🌾", "Câu trả lời của bạn đã được ghi nhận. Nếp Việt sẽ liên hệ qua email nếu bạn đã đăng ký dùng thử sớm.");
   } else {
     end("Cảm ơn bạn rất nhiều 🌾", "Chế độ thử: trang chưa được nối với nơi nhận dữ liệu, nên câu trả lời chưa được gửi đi.");
